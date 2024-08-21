@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project\\Server\\RogueRunnerServer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|d:\\project\\server\\roguerunnerserver\\roguerunnerserver\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|solutionrelative:roguerunnerserver\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|d:\\project\\server\\roguerunnerserver\\roguerunnerserver\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|solutionrelative:roguerunnerserver\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|d:\\project\\server\\roguerunnerserver\\roguerunnerserver\\controllers\\playerdatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|solutionrelative:roguerunnerserver\\controllers\\playerdatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|d:\\project\\server\\roguerunnerserver\\roguerunnerserver\\controllers\\rankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D89F5601-ED36-4406-B0F7-228B94688EC6}|RogueRunnerServer\\RogueRunnerServer.csproj|solutionrelative:roguerunnerserver\\controllers\\rankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegisterController.cs",
+              "DocumentMoniker": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\RegisterController.cs",
+              "RelativeDocumentMoniker": "RogueRunnerServer\\Controllers\\RegisterController.cs",
+              "ToolTip": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\RegisterController.cs",
+              "RelativeToolTip": "RogueRunnerServer\\Controllers\\RegisterController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T08:27:11.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "RogueRunnerServer\\Controllers\\LoginController.cs",
+              "ToolTip": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "RogueRunnerServer\\Controllers\\LoginController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T08:27:02.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RankController.cs",
+              "DocumentMoniker": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\RankController.cs",
+              "RelativeDocumentMoniker": "RogueRunnerServer\\Controllers\\RankController.cs",
+              "ToolTip": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\RankController.cs",
+              "RelativeToolTip": "RogueRunnerServer\\Controllers\\RankController.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAAwBEAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-20T09:46:47.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerDataController.cs",
+              "DocumentMoniker": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\PlayerDataController.cs",
+              "RelativeDocumentMoniker": "RogueRunnerServer\\Controllers\\PlayerDataController.cs",
+              "ToolTip": "D:\\Project\\Server\\RogueRunnerServer\\RogueRunnerServer\\Controllers\\PlayerDataController.cs",
+              "RelativeToolTip": "RogueRunnerServer\\Controllers\\PlayerDataController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-19T11:03:07.367Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

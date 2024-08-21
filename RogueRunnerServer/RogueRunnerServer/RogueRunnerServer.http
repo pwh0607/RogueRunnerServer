@@ -1,0 +1,6 @@
+@RogueRunnerServer_HostAddress = http://localhost:5001
+
+GET {{RogueRunnerServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

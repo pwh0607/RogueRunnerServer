@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ufPKtIYFQefIuE0b1F2VKusnW/f4vU7A4qxMqfuWiXY=",
+  "Source": "RogueRunnerServer",
+  "BasePath": "_content/RogueRunnerServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
