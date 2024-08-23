@@ -26,6 +26,7 @@ namespace RogueRunnerServer.Controllers
 
         public class PlayerDataRequest
         {
+            //public int p_id { get; set; }
             public int Stage { get; set; }
             public string SceneName { get; set; }
             public string PlayerCharacter { get; set; }
