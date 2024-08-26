@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using RogueRunnerServer.Model;
-using System.Data;
 using RogueRunnerServer.Data;
+using System.Data;
 
 namespace RogueRunnerServer.Controllers
 {
@@ -24,7 +24,7 @@ namespace RogueRunnerServer.Controllers
         }
 
         //DB에 user정보를 저장하는 메서드.        POST
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest request)
         {
             // 기본적인 데이터 유효성 검사
@@ -50,14 +50,14 @@ namespace RogueRunnerServer.Controllers
 
             return Ok(new { message = "User registered successfully.", user = newUser });
         }
-
-        //회원가입 후 DB에서 user정보들을 받아오는 메서드.
+        /*
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
             return Ok(users);
         }
+        */
     }
 
     public class RegisterRequest
