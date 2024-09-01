@@ -22,7 +22,7 @@ namespace RogueRunnerServer.Controllers
         }
 
         //Upsert 방식으로 P_Id를 기준으로 기존의 값이 존재하면 갱신하고, 없었으면 추가하는 방식이다.
-        [HttpPost("playerData")]
+        [HttpPost]
         public async Task<IActionResult> PostPlayerData([FromBody] PlayerDataRequest request)
         {
             if (request == null)
@@ -35,19 +35,19 @@ namespace RogueRunnerServer.Controllers
                 $"Character {request.PlayerCharacter}, HP {request.HP}, Score {request.Score}, Speed {request.Speed}");
 
             //존재 여부를 확인하는 참조
-            var existingPlayerData = await _context.PlayerDatas.FindAsync(request.P_Id);
+            var existingData = await _context.PlayerDatas.FindAsync(request.P_Id);
 
-            if (existingPlayerData != null) {
+            if (existingData != null) {
                 //기존 레코드 존재시 갱신하기.
-                existingPlayerData.Stage = request.Stage;
-                existingPlayerData.SceneName = request.SceneName;
-                existingPlayerData.PlayerCharacter = request.PlayerCharacter;
-                existingPlayerData.HP = request.HP;
-                existingPlayerData.Score = request.Score;
-                existingPlayerData.Speed = request.Speed;
-                existingPlayerData.Skills = JsonConvert.SerializeObject(request.Skills);
+                existingData.Stage = request.Stage;
+                existingData.SceneName = request.SceneName;
+                existingData.PlayerCharacter = request.PlayerCharacter;
+                existingData.HP = request.HP;
+                existingData.Score = request.Score;
+                existingData.Speed = request.Speed;
+                existingData.Skills = JsonConvert.SerializeObject(request.Skills);
 
-                _context.PlayerDatas.Update(existingPlayerData);
+                _context.PlayerDatas.Update(existingData);
             }
             else
             {
@@ -66,7 +66,6 @@ namespace RogueRunnerServer.Controllers
 
                 _context.PlayerDatas.Add(playerData);
             }
-
             await _context.SaveChangesAsync();
 
             // 예시로, 받은 데이터를 다시 반환
@@ -74,9 +73,8 @@ namespace RogueRunnerServer.Controllers
         }
 
         //게임 이어하기시 사용자 데이터 가져오기.
-        
-        [HttpGet("playerData/{p_id}")]
-        public async Task<IActionResult> GetPlayerData(int p_id)
+        [HttpGet("{p_id}")]
+        public async Task<IActionResult> GetPlayerData(string p_id)
         {
             var playerData = await _context.PlayerDatas.FindAsync(p_id);
 
@@ -85,19 +83,20 @@ namespace RogueRunnerServer.Controllers
                 // P_Id에 해당하는 레코드가 없으면 404 Not Found 반환
                 return NotFound($"PlayerData with P_Id {p_id} not found.");
             }
+            var skillsDictionary = JsonConvert.DeserializeObject<Dictionary<string, int>>(playerData.Skills);
 
             var response = new PlayerDataResponse
             {
-                P_Id = playerData.P_Id,
                 Stage = playerData.Stage,
                 SceneName = playerData.SceneName,
                 PlayerCharacter = playerData.PlayerCharacter,
                 HP = playerData.HP,
                 Score = playerData.Score,
                 Speed = playerData.Speed,
-                Skills = JsonConvert.DeserializeObject<Dictionary<string, int>>(playerData.Skills)
+                Skills = JsonConvert.SerializeObject(skillsDictionary)
             };
 
+            Console.Write($"데이터 추출 정보 확인 => HP : {response.HP}, Score : {response.Score}");
             return Ok(response);
         }
         
@@ -115,14 +114,14 @@ namespace RogueRunnerServer.Controllers
 
         public class PlayerDataResponse
         {
-            public string P_Id { get; set; }                           
+            //p_id를 url을 통해 데이터를 받아오기 때문에 불필요
             public int Stage { get; set; }                             
             public string SceneName { get; set; }                      
             public string PlayerCharacter { get; set; }               
             public int HP { get; set; }                                
             public float Score { get; set; }                           
             public float Speed { get; set; }                          
-            public Dictionary<string, int> Skills { get; set; }        
+            public string Skills { get; set; }        
         }
     }
 }
