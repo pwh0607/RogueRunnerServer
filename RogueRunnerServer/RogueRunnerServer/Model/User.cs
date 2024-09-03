@@ -18,9 +18,7 @@ namespace RogueRunnerServer.Model
         public string Nickname { get; set; }
 
         public User() { }
-
-        public User(string p_id, string id, string password, string nickname)
-        {
+        public User(string p_id, string id, string password, string nickname){
             P_Id = p_id;
             Id = id;
             PasswordHash = password;

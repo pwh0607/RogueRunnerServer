@@ -78,6 +78,11 @@ namespace RogueRunnerServer.Controllers
 
             Console.WriteLine("랭크 리스트 Get 호출 : " + scoreRankList.Count);
 
+            foreach(var rank in scoreRankList)
+            {
+                Console.WriteLine($"{rank.P_Id},{rank.NickName},{rank.Score}");
+            }
+
             if (scoreRankList == null)
             {
                 Console.WriteLine("랭크 리스트가 없습니다.");

@@ -25,20 +25,13 @@ namespace RogueRunnerServer.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPlayerData([FromBody] PlayerDataRequest request)
         {
-            if (request == null)
-            {
+            if (request == null){
                 return BadRequest("Invalid data.");
             }
 
-            // 여기에서 수신된 데이터를 처리하거나 데이터베이스에 저장할 수 있습니다.
-            Console.WriteLine($"Received data: P_Id {request.P_Id}, Stage {request.Stage}, Scene {request.SceneName}, " +
-                $"Character {request.PlayerCharacter}, HP {request.HP}, Score {request.Score}, Speed {request.Speed}");
-
             //존재 여부를 확인하는 참조
             var existingData = await _context.PlayerDatas.FindAsync(request.P_Id);
-
             if (existingData != null) {
-                //기존 레코드 존재시 갱신하기.
                 existingData.Stage = request.Stage;
                 existingData.SceneName = request.SceneName;
                 existingData.PlayerCharacter = request.PlayerCharacter;
@@ -51,7 +44,6 @@ namespace RogueRunnerServer.Controllers
             }
             else
             {
-                //데이터가 없으면 새로 생성하기.
                 var playerData = new PlayerData
                 {
                     P_Id = request.P_Id,
@@ -61,14 +53,11 @@ namespace RogueRunnerServer.Controllers
                     HP = request.HP,
                     Score = request.Score,
                     Speed = request.Speed,
-                    Skills = JsonConvert.SerializeObject(request.Skills)         //Dictionary는 JSON(해당 서버에서는 string...)형식으로...
+                    Skills = JsonConvert.SerializeObject(request.Skills)                                //Dictionary는 JSON(해당 서버에서는 string...)형식으로...
                 };
-
                 _context.PlayerDatas.Add(playerData);
             }
             await _context.SaveChangesAsync();
-
-            // 예시로, 받은 데이터를 다시 반환
             return Ok(request);
         }
 
@@ -81,9 +70,8 @@ namespace RogueRunnerServer.Controllers
             if (playerData == null)
             {
                 // P_Id에 해당하는 레코드가 없으면 404 Not Found 반환
-                return NotFound($"PlayerData with P_Id {p_id} not found.");
+                return NotFound($"{p_id}의 PlayerData를 찾을 수 없습니다.");
             }
-            var skillsDictionary = JsonConvert.DeserializeObject<Dictionary<string, int>>(playerData.Skills);
 
             var response = new PlayerDataResponse
             {
@@ -93,10 +81,8 @@ namespace RogueRunnerServer.Controllers
                 HP = playerData.HP,
                 Score = playerData.Score,
                 Speed = playerData.Speed,
-                Skills = JsonConvert.SerializeObject(skillsDictionary)
+                Skills = playerData.Skills
             };
-
-            Console.Write($"데이터 추출 정보 확인 => HP : {response.HP}, Score : {response.Score}");
             return Ok(response);
         }
         

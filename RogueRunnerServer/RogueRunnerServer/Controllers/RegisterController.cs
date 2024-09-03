@@ -23,41 +23,45 @@ namespace RogueRunnerServer.Controllers
             _context = context;
         }
 
-        //DB에 user정보를 저장하는 메서드.        POST
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest request)
         {
             // 기본적인 데이터 유효성 검사
-            if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Nickname) || string.IsNullOrEmpty(request.Password))
-            {
-                return BadRequest("All fields are required.");
+            if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Nickname) || string.IsNullOrEmpty(request.Password)){
+                return BadRequest("모든 데이터를 넣어주세요...");
             }
 
             Console.WriteLine($"요청 정보 - UserID : {request.Id}, Password : {request.Password}, Nickname : {request.Nickname},");
 
-            // 고유 식별번호 생성
-            string p_id = System.Guid.NewGuid().ToString();
+            // 사용자 ID 중복 검사
+            if (await IsUserIdDuplicated(request.Id)){
+                return Conflict(new { message = "이미 사용 중인 ID입니다." });
+            }
+            // 닉네임 중복 검사
+            if (await IsNicknameDuplicated(request.Nickname)){
+                return Conflict(new { message = "이미 사용 중인 NickName입니다." });
+            }
 
-            //비밀번호 해싱
-            var passwordHasher = new PasswordHasher<User>();
+            string p_id = System.Guid.NewGuid().ToString();             // 고유 식별번호 생성
+            var passwordHasher = new PasswordHasher<User>();            //비밀번호 해싱
             var hashedPassword = passwordHasher.HashPassword(null, request.Password);
 
-            // 사용자 데이터 생성
-            var newUser = new User(p_id, request.Id, hashedPassword, request.Nickname);
+            var newUser = new User(p_id, request.Id, hashedPassword, request.Nickname); // 사용자 데이터 모델 생성
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
+            return Ok(new { message = "회원 가입 성공.", user = newUser });
+        }
 
-            return Ok(new { message = "User registered successfully.", user = newUser });
+        // 사용자 ID 중복 검사 메서드
+        private async Task<bool> IsUserIdDuplicated(string userId){
+            return await _context.Users.AnyAsync(u => u.Id == userId);
         }
-        /*
-        [HttpGet]
-        public async Task<IActionResult> GetUsers()
-        {
-            var users = await _context.Users.ToListAsync();
-            return Ok(users);
+
+        // 닉네임 중복 검사 메서드
+        private async Task<bool> IsNicknameDuplicated(string nickname){
+            return await _context.Users.AnyAsync(u => u.Nickname == nickname);
         }
-        */
     }
 
     public class RegisterRequest

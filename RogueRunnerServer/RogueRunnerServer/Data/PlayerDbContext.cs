@@ -7,11 +7,9 @@ namespace RogueRunnerServer.Data
     public class PlayerDbContext : DbContext
     {
         public DbSet<PlayerData> PlayerDatas { get; set; }
-
         public PlayerDbContext(DbContextOptions<PlayerDbContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<PlayerData>().ToTable("playerdata");
             modelBuilder.Entity<PlayerData>().HasKey(u => u.P_Id);
             modelBuilder.Entity<PlayerData>().Property(u => u.Stage).IsRequired();

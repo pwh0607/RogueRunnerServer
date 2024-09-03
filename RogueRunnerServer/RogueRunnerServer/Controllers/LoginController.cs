@@ -24,16 +24,16 @@ namespace RogueRunnerServer.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginRequest request)
         {
-            // 유효성 검사.
+            // 유효성 검사
             if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Password))
             {
-                return BadRequest("ID and Password are required.");
+                return BadRequest(new { message = "ID와 비밀번호를 모두 적어주세요." });           //400
             }
 
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == request.Id);
             if (user == null)
             {
-                return Unauthorized("Invalid ID or Password.");
+                return Unauthorized(new { message = "옳지 않은 ID 혹은 비밀번호입니다." });               //401
             }
 
             // 비밀번호 검증
@@ -41,7 +41,7 @@ namespace RogueRunnerServer.Controllers
             var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
             if (result == PasswordVerificationResult.Failed)
             {
-                return Unauthorized("Invalid ID or Password.");
+                return Unauthorized(new { message = "옳지 않은 ID 혹은 비밀번호입니다." });
             }
 
             return Ok(new
