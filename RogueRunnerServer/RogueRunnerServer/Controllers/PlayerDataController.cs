@@ -34,7 +34,7 @@ namespace RogueRunnerServer.Controllers
             if (existingData != null) {
                 existingData.Stage = request.Stage;
                 existingData.SceneName = request.SceneName;
-                existingData.PlayerCharacter = request.PlayerCharacter;
+                //existingData.PlayerCharacter = request.PlayerCharacter;
                 existingData.HP = request.HP;
                 existingData.Score = request.Score;
                 existingData.Speed = request.Speed;
@@ -49,7 +49,7 @@ namespace RogueRunnerServer.Controllers
                     P_Id = request.P_Id,
                     Stage = request.Stage,
                     SceneName = request.SceneName,
-                    PlayerCharacter = request.PlayerCharacter,
+                    //PlayerCharacter = request.PlayerCharacter,
                     HP = request.HP,
                     Score = request.Score,
                     Speed = request.Speed,
@@ -77,7 +77,7 @@ namespace RogueRunnerServer.Controllers
             {
                 Stage = playerData.Stage,
                 SceneName = playerData.SceneName,
-                PlayerCharacter = playerData.PlayerCharacter,
+                //PlayerCharacter = playerData.PlayerCharacter,
                 HP = playerData.HP,
                 Score = playerData.Score,
                 Speed = playerData.Speed,
@@ -91,7 +91,7 @@ namespace RogueRunnerServer.Controllers
             public string P_Id { get; set; }                           //고유 P_Id
             public int Stage { get; set; }                          //Stage 번호
             public string SceneName { get; set; }                   //씬 이름
-            public string PlayerCharacter { get; set; }             //사용자 캐릭터명
+           // public string PlayerCharacter { get; set; }             //사용자 캐릭터명
             public int HP { get; set; }                             //체력
             public float Score { get; set; }                        //누적 점수
             public float Speed { get; set; }                        //누적 스피드
@@ -103,7 +103,7 @@ namespace RogueRunnerServer.Controllers
             //p_id를 url을 통해 데이터를 받아오기 때문에 불필요
             public int Stage { get; set; }                             
             public string SceneName { get; set; }                      
-            public string PlayerCharacter { get; set; }               
+           // public string PlayerCharacter { get; set; }               
             public int HP { get; set; }                                
             public float Score { get; set; }                           
             public float Speed { get; set; }                          
