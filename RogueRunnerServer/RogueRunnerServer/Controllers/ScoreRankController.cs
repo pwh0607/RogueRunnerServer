@@ -21,7 +21,7 @@ namespace RogueRunnerServer.Controllers
         private readonly ScoreRankDbContext _context;
 
         public ScoreRankController(ScoreRankDbContext context) { 
-        _context = context;
+            _context = context;
         }
 
         [HttpPost]
@@ -66,6 +66,7 @@ namespace RogueRunnerServer.Controllers
             // 예시로, 받은 데이터를 다시 반환
             return Ok(request);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetScoreRank(){
             //정렬된 리스트의 형식으로 db에서 데이터 가져오기.
