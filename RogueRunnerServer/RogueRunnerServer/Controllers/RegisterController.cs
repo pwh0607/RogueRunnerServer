@@ -26,6 +26,7 @@ namespace RogueRunnerServer.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest request)
         {
+            Console.WriteLine("POST : Register Post Request...");
             // 기본적인 데이터 유효성 검사
             if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Nickname) || string.IsNullOrEmpty(request.Password)){
                 return BadRequest("모든 데이터를 넣어주세요...");

@@ -24,6 +24,7 @@ namespace RogueRunnerServer.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginRequest request)
         {
+            Console.WriteLine("POST : Login Request...");
             // 유효성 검사
             if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Password))
             {
