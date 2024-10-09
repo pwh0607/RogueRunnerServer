@@ -14,7 +14,6 @@ namespace RogueRunnerServer.Data
             modelBuilder.Entity<PlayerData>().HasKey(u => u.P_Id);
             modelBuilder.Entity<PlayerData>().Property(u => u.Stage).IsRequired();
             modelBuilder.Entity<PlayerData>().Property(u => u.SceneName).IsRequired();
-            //modelBuilder.Entity<PlayerData>().Property(u => u.PlayerCharacter).IsRequired();
             modelBuilder.Entity<PlayerData>().Property(u => u.HP).IsRequired();
             modelBuilder.Entity<PlayerData>().Property(u => u.Score).IsRequired();
             modelBuilder.Entity<PlayerData>().Property(u => u.Speed).IsRequired();

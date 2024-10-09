@@ -14,10 +14,7 @@ namespace RogueRunnerServer.Model
 
         [Column("SceneName")]
         public string SceneName { get; set; }
-        /*
-        [Column("PlayerCharacter")]
-        public string PlayerCharacter { get; set; }
-        */
+
         [Column("HP")]
         public int HP { get; set; }
 
