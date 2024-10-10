@@ -61,8 +61,16 @@ namespace RogueRunnerServer.Controllers
 
                 _context.ScoreDatas.Add(ScoreData);
             }
-
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error while saving data: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+            //await _context.SaveChangesAsync();
 
             // 예시로, 받은 데이터를 다시 반환
             return Ok(request);
