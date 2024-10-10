@@ -27,6 +27,7 @@ namespace RogueRunnerServer.Controllers
         [HttpPost]
         public async Task<IActionResult> SendScoreData([FromBody] ScoreRankRequest request)
         {
+            Console.WriteLine("POST : Rank Score Update Request");
             if (request == null)
             {
                 return BadRequest("Invalid data.");
@@ -69,6 +70,8 @@ namespace RogueRunnerServer.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetScoreRank(){
+
+            Console.WriteLine("GET : Score RankList Request");
             //정렬된 리스트의 형식으로 db에서 데이터 가져오기.
             var scoreRankList = await _context.ScoreDatas.OrderByDescending(data => data.Score).Select(data => new ScoreRankResponse
             {
@@ -86,7 +89,7 @@ namespace RogueRunnerServer.Controllers
 
             if (scoreRankList == null)
             {
-                Console.WriteLine("랭크 리스트가 없습니다.");
+                Console.WriteLine("Non RankList");
             }
 
             var rankResponse = new RankListResponse

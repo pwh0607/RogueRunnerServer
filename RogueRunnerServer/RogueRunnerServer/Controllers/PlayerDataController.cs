@@ -25,6 +25,7 @@ namespace RogueRunnerServer.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPlayerData([FromBody] PlayerDataRequest request)
         {
+            Console.WriteLine("POST : PlayerData Update Request...");
             if (request == null){
                 return BadRequest("Invalid data.");
             }
@@ -34,7 +35,6 @@ namespace RogueRunnerServer.Controllers
             if (existingData != null) {
                 existingData.Stage = request.Stage;
                 existingData.SceneName = request.SceneName;
-                //existingData.PlayerCharacter = request.PlayerCharacter;
                 existingData.HP = request.HP;
                 existingData.Score = request.Score;
                 existingData.Speed = request.Speed;
@@ -65,6 +65,7 @@ namespace RogueRunnerServer.Controllers
         [HttpGet("{p_id}")]
         public async Task<IActionResult> GetPlayerData(string p_id)
         {
+            Console.WriteLine("GET : PlayerData Get Request...");
             var playerData = await _context.PlayerDatas.FindAsync(p_id);
 
             if (playerData == null)
@@ -77,7 +78,6 @@ namespace RogueRunnerServer.Controllers
             {
                 Stage = playerData.Stage,
                 SceneName = playerData.SceneName,
-                //PlayerCharacter = playerData.PlayerCharacter,
                 HP = playerData.HP,
                 Score = playerData.Score,
                 Speed = playerData.Speed,
@@ -85,13 +85,28 @@ namespace RogueRunnerServer.Controllers
             };
             return Ok(response);
         }
-        
+
+        [HttpDelete("{p_id}")]
+        public async Task<IActionResult> DeletePlayerData(string p_id)
+        {
+            Console.WriteLine("DELETE : PlayerData Delete Request...");
+            var playerData = await _context.PlayerDatas.FindAsync(p_id);
+            if (playerData == null)
+            {   //만약 임시 데이터가 없으면 그냥 무시
+                return NotFound($"{p_id}의 PlayerData를 찾을 수 없습니다.");
+            }
+
+            _context.PlayerDatas.Remove(playerData);
+            await _context.SaveChangesAsync();
+
+            return Ok($"{p_id}의 임시 PlayerData가 성공적으로 삭제되었습니다.");
+        }
+
         public class PlayerDataRequest
         {
             public string P_Id { get; set; }                           //고유 P_Id
             public int Stage { get; set; }                          //Stage 번호
             public string SceneName { get; set; }                   //씬 이름
-           // public string PlayerCharacter { get; set; }             //사용자 캐릭터명
             public int HP { get; set; }                             //체력
             public float Score { get; set; }                        //누적 점수
             public float Speed { get; set; }                        //누적 스피드
@@ -102,8 +117,7 @@ namespace RogueRunnerServer.Controllers
         {
             //p_id를 url을 통해 데이터를 받아오기 때문에 불필요
             public int Stage { get; set; }                             
-            public string SceneName { get; set; }                      
-           // public string PlayerCharacter { get; set; }               
+            public string SceneName { get; set; }                       
             public int HP { get; set; }                                
             public float Score { get; set; }                           
             public float Speed { get; set; }                          
