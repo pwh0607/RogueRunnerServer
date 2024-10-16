@@ -4,7 +4,6 @@ using RogueRunnerServer.Model;
 
 namespace RogueRunnerServer.Data
 {
-    //DB의 테이블과 클라이언트로 부터 받아온 값을 정리.
     public class UserDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }

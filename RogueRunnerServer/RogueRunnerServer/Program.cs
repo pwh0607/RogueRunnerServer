@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -83,6 +81,5 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine($"Rank DB connection failed: {ex.Message}");
     }
 }
-
 
 app.Run();

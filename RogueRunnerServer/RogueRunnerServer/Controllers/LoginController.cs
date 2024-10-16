@@ -25,7 +25,7 @@ namespace RogueRunnerServer.Controllers
         public async Task<IActionResult> LoginUser([FromBody] LoginRequest request)
         {
             Console.WriteLine("POST : Login Request...");
-            // 유효성 검사
+
             if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Password))
             {
                 return BadRequest(new { message = "ID와 비밀번호를 모두 적어주세요." });           //400
@@ -37,7 +37,6 @@ namespace RogueRunnerServer.Controllers
                 return Unauthorized(new { message = "옳지 않은 ID 혹은 비밀번호입니다." });               //401
             }
 
-            // 비밀번호 검증
             var passwordHasher = new PasswordHasher<User>();
             var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
             if (result == PasswordVerificationResult.Failed)

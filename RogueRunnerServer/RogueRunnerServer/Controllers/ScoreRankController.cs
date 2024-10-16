@@ -41,12 +41,12 @@ namespace RogueRunnerServer.Controllers
                 if (existingData.Score < request.Score)
                 {
                     existingData.Score = request.Score;
-                    Console.WriteLine("기존의 Score 보다 높아 갱신합니다.");
+                    Console.WriteLine("New Score Updating...");
                     _context.ScoreDatas.Update(existingData);
                 }
                 else
                 {
-                    Console.WriteLine("기존의 Score 보다 낮아 갱신하지 않습니다.");
+                    Console.WriteLine("Score Not updating...");
                 }
             }
             else
@@ -61,6 +61,7 @@ namespace RogueRunnerServer.Controllers
 
                 _context.ScoreDatas.Add(ScoreData);
             }
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -70,9 +71,7 @@ namespace RogueRunnerServer.Controllers
                 Console.WriteLine($"Error while saving data: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
-            //await _context.SaveChangesAsync();
 
-            // 예시로, 받은 데이터를 다시 반환
             return Ok(request);
         }
 
@@ -80,7 +79,7 @@ namespace RogueRunnerServer.Controllers
         public async Task<IActionResult> GetScoreRank(){
 
             Console.WriteLine("GET : Score RankList Request");
-            //정렬된 리스트의 형식으로 db에서 데이터 가져오기.
+
             var scoreRankList = await _context.ScoreDatas.OrderByDescending(data => data.Score).Select(data => new ScoreRankResponse
             {
                 P_Id = data.P_Id,
@@ -105,26 +104,15 @@ namespace RogueRunnerServer.Controllers
                 Ranks = scoreRankList
             };
 
-            /*
-             * query 형식의 DB context.
-                string query = @"
-                                SELECT P_Id, Nickname, Score
-                                FROM scoreboard
-                                ORDER BY Score DESC";
-            
-                var scoreRankList = await _context.ScoreDatas.FromSqlRaw(query).ToListAsync();
-            */
             return Ok(rankResponse);
         }
 
-        //게임 완료후 데이터를 랭킹 리스트에 갱신 및 추가하는 Request
         public class ScoreRankRequest {
             public string P_Id { get; set; }
             public string NickName { get; set; }
             public float Score { get; set; }
         }
 
-        //랭킹 리스트를 모두 가져오는 Res
         public class ScoreRankResponse {
             public string P_Id { get; set; }
             public string NickName { get; set; }
