@@ -23,12 +23,10 @@ namespace RogueRunnerServer.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPlayerData([FromBody] PlayerDataRequest request)
         {
-            Console.WriteLine("POST : PlayerData Update Request...");
             if (request == null){
                 return BadRequest("Invalid data.");
             }
 
-            //존재 여부를 확인하는 참조
             var existingData = await _context.PlayerDatas.FindAsync(request.P_Id);
             if (existingData != null) {
                 existingData.Stage = request.Stage;
@@ -61,12 +59,11 @@ namespace RogueRunnerServer.Controllers
         [HttpGet("{p_id}")]
         public async Task<IActionResult> GetPlayerData(string p_id)
         {
-            Console.WriteLine("GET : PlayerData Get Request...");
             var playerData = await _context.PlayerDatas.FindAsync(p_id);
 
             if (playerData == null)
             {
-                return NotFound($"{p_id}의 PlayerData를 찾을 수 없습니다.");
+                return NotFound($"PlayerData for {p_id} could not be found.");
             }
 
             var response = new PlayerDataResponse
@@ -84,17 +81,16 @@ namespace RogueRunnerServer.Controllers
         [HttpDelete("{p_id}")]
         public async Task<IActionResult> DeletePlayerData(string p_id)
         {
-            Console.WriteLine("DELETE : PlayerData Delete Request...");
             var playerData = await _context.PlayerDatas.FindAsync(p_id);
             if (playerData == null)
             {
-                return NotFound($"{p_id}의 PlayerData를 찾을 수 없습니다.");
+                return NotFound($"PlayerData for {p_id} could not be found.");
             }
 
             _context.PlayerDatas.Remove(playerData);
             await _context.SaveChangesAsync();
 
-            return Ok($"{p_id}의 임시 PlayerData가 성공적으로 삭제되었습니다.");
+            return Ok($"Temporary PlayerData for {p_id} has been successfully deleted.");
         }
 
         public class PlayerDataRequest

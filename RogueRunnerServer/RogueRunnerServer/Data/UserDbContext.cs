@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RogueRunnerServer.Controllers;
 using RogueRunnerServer.Model;
 
 namespace RogueRunnerServer.Data

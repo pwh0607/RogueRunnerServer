@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RogueRunnerServer.Model
 {
@@ -18,6 +17,7 @@ namespace RogueRunnerServer.Model
         public string Nickname { get; set; }
 
         public User() { }
+
         public User(string p_id, string id, string password, string nickname){
             P_Id = p_id;
             Id = id;
@@ -26,3 +26,4 @@ namespace RogueRunnerServer.Model
         }
     }
 }
+

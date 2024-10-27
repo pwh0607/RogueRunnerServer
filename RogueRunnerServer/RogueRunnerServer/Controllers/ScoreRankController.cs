@@ -68,7 +68,6 @@ namespace RogueRunnerServer.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error while saving data: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
 
@@ -76,18 +75,14 @@ namespace RogueRunnerServer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetScoreRank(){
-
-            Console.WriteLine("GET : Score RankList Request");
-
+        public async Task<IActionResult> GetScoreRank()
+        {
             var scoreRankList = await _context.ScoreDatas.OrderByDescending(data => data.Score).Select(data => new ScoreRankResponse
             {
                 P_Id = data.P_Id,
                 NickName = data.Nickname,
                 Score = data.Score
             }).ToListAsync();
-
-            Console.WriteLine("랭크 리스트 Get 호출 : " + scoreRankList.Count);
 
             foreach(var rank in scoreRankList)
             {

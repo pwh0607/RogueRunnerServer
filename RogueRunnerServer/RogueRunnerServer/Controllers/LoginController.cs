@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using RogueRunnerServer.Model;
 using RogueRunnerServer.Data;
@@ -21,20 +17,18 @@ namespace RogueRunnerServer.Controllers
             _context = context;
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> LoginUser([FromBody] LoginRequest request)
         {
-            Console.WriteLine("POST : Login Request...");
-
             if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Password))
             {
-                return BadRequest(new { message = "ID와 비밀번호를 모두 적어주세요." });           //400
+                return BadRequest(new { message = "ID와 비밀번호를 모두 적어주세요." });           
             }
 
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == request.Id);
             if (user == null)
             {
-                return Unauthorized(new { message = "옳지 않은 ID 혹은 비밀번호입니다." });               //401
+                return Unauthorized(new { message = "옳지 않은 ID 혹은 비밀번호입니다." });               
             }
 
             var passwordHasher = new PasswordHasher<User>();

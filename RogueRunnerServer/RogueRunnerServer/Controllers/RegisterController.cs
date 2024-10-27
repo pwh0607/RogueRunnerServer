@@ -25,27 +25,25 @@ namespace RogueRunnerServer.Controllers
             _context = context;
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest request)
         {
-            Console.WriteLine("POST : Register Post Request...");
-
             if (string.IsNullOrEmpty(request.Id) || string.IsNullOrEmpty(request.Nickname) || string.IsNullOrEmpty(request.Password)){
-                return BadRequest("모든 데이터를 넣어주세요...");
+                return BadRequest("User ID and Nickname are required and cannot be empty.");
             }
 
-            Console.WriteLine($"요청 정보 - UserID : {request.Id}, Password : {request.Password}, Nickname : {request.Nickname},");
-
             if (await IsUserIdDuplicated(request.Id)){
-                return Conflict(new { message = "이미 사용 중인 ID입니다." });
+                return Conflict(new { message = "The provided user ID already exists." });
             }
 
             if (await IsNicknameDuplicated(request.Nickname)){
-                return Conflict(new { message = "이미 사용 중인 NickName입니다." });
+                return Conflict(new { message = "The provided user Nickname already exists." });
             }
-            string curYear = DateTime.Today.Year.ToString();
+
+            string curYear = (DateTime.Today.Year % 100).ToString();
             int cnt = _context.Users.Count(u => u.P_Id.StartsWith(curYear));
-            string p_id = PidService.MakePid(cnt);
+            string p_id = PidService.MakePid(curYear,cnt);
+
             var passwordHasher = new PasswordHasher<User>();
             var hashedPassword = passwordHasher.HashPassword(null, request.Password);
 
@@ -53,7 +51,7 @@ namespace RogueRunnerServer.Controllers
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            return Ok(new { message = "회원 가입 성공.", user = newUser });
+            return Ok(new { message = "Complete", user = newUser });
         }
 
         private async Task<bool> IsUserIdDuplicated(string userId){
